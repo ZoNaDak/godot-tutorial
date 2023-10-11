@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2xvkfoel8bsw"]
+
+[ext_resource type="Script" path="res://godot-2d-tutorial/main.gd" id="1_ickx3"]
+[ext_resource type="PackedScene" uid="uid://dsgkbiwmead2s" path="res://godot-2d-tutorial/player.tscn" id="1_vjrol"]
+[ext_resource type="PackedScene" uid="uid://cdvg18v7lhtni" path="res://godot-2d-tutorial/mob.tscn" id="2_508ae"]
+
+[sub_resource type="Curve2D" id="Curve2D_ykgup"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -3, 10, 0, 0, 0, 0, 480, 5, 0, 0, 0, 0, 481, 722, 0, 0, 0, 0, -1, 724, 0, 0, 0, 0, -3, 10)
+}
+point_count = 5
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ickx3")
+mob_scene = ExtResource("2_508ae")
+
+[node name="Player" parent="." instance=ExtResource("1_vjrol")]
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(240, 450)
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ykgup")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(-3, 10)
+rotation = -0.0103516
+
+[connection signal="hit" from="Player" to="." method="new_game"]
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
