@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgmbvmoupiwyq"]
+[gd_scene load_steps=5 format=3 uid="uid://dgmbvmoupiwyq"]
 
-[ext_resource type="Script" path="res://HUD.gd" id="1_y140m"]
+[ext_resource type="Script" path="res://godot-2d-tutorial/HUD.gd" id="1_cbqe0"]
 [ext_resource type="FontFile" uid="uid://cjkat34mxd2wk" path="res://godot-2d-tutorial/dodge_the_creeps_2d_assets/fonts/Xolonium-Regular.ttf" id="2_1osac"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_qc150"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_7b6cc"]
+events = [SubResource("InputEventAction_qc150")]
+
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("1_y140m")
+script = ExtResource("1_cbqe0")
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 5
@@ -55,6 +61,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_1osac")
 theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_7b6cc")
 text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="."]

@@ -1,15 +1,18 @@
-extends Node2D
+extends Node
 
 @export var mob_scene: PackedScene
 var score
 
 func game_over():
+	$Music.stop()
+	$DeathSound.play()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
 
 func new_game():
 	score = 0
+	$Music.play()
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
