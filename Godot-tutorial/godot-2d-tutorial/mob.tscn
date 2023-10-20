@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://cdvg18v7lhtni"]
+
+[ext_resource type="Texture2D" uid="uid://bks2hxtt1k58b" path="res://godot-2d-tutorial/dodge_the_creeps_2d_assets/art/enemyFlyingAlt_1.png" id="1_ep7q6"]
+[ext_resource type="Script" path="res://godot-2d-tutorial/mob.gd" id="1_wvroc"]
+[ext_resource type="Texture2D" uid="uid://1v4ve84hxlu6" path="res://godot-2d-tutorial/dodge_the_creeps_2d_assets/art/enemyFlyingAlt_2.png" id="2_r272m"]
+[ext_resource type="Texture2D" uid="uid://dckadyg00uq3y" path="res://godot-2d-tutorial/dodge_the_creeps_2d_assets/art/enemySwimming_1.png" id="3_8sioi"]
+[ext_resource type="Texture2D" uid="uid://b4nkjti6c8xya" path="res://godot-2d-tutorial/dodge_the_creeps_2d_assets/art/enemySwimming_2.png" id="4_cir8u"]
+[ext_resource type="Texture2D" uid="uid://b0sdipg6uui2w" path="res://godot-2d-tutorial/dodge_the_creeps_2d_assets/art/enemyWalking_1.png" id="5_so8tx"]
+[ext_resource type="Texture2D" uid="uid://nihmwb4xtd0i" path="res://godot-2d-tutorial/dodge_the_creeps_2d_assets/art/enemyWalking_2.png" id="6_rt0km"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jgvu5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ep7q6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_r272m")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8sioi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cir8u")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_so8tx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rt0km")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfqsc"]
+radius = 35.0
+height = 94.0
+
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 2.66454e-15
+script = ExtResource("1_wvroc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_jgvu5")
+animation = &"walk"
+frame_progress = 0.402981
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wfqsc")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
