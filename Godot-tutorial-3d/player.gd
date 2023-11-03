@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 @export var speed = 14
 @export var fall_accelaration = 75
+@export var jump_impulse = 20
+@export var bounce_impulse = 16
 
 var target_veclocity = Vector3.ZERO
 
@@ -25,7 +27,21 @@ func _physics_process(delta):
 	target_veclocity.z = direction.z * speed
 	
 	if not is_on_floor():
-		target_veclocity.y = target_veclocity.y - (fall_accelaration * delta)
+		target_veclocity.y = target_veclocity.y - (fall_accelaration * delta)		
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		target_veclocity.y = jump_impulse
+	
+	for index in range(get_slide_collision_count()):
+		var collision = get_slide_collision(index)
+		
+		if collision.get_collider() == null:
+			continue
+		
+		if collision.get_collider().is_in_group("mob"):
+			var mob = collision.get_collider()
+			if Vector3.UP.dot(collision.get_normal()) > 0.1:
+				mob.squash()
+				target_veclocity.y = bounce_impulse
 		
 	velocity = target_veclocity
 	move_and_slide()
