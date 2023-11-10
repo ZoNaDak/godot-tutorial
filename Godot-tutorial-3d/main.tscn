@@ -18,10 +18,10 @@ material = SubResource("StandardMaterial3D_cb2pa")
 
 [sub_resource type="Curve3D" id="Curve3D_xjsmf"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -12.9754, 0, -13.8003, 0, 0, 0, 0, 0, 0, 13.1092, 0, -13.8449, 0, 0, 0, 0, 0, 0, 13.1092, 0, 15.138, 0, 0, 0, 0, 0, 0, -12.9308, 0, 15.138, 0, 0, 0, 0, 0, 0, -13, 0, -14, 0, 0, 0, 0, 0, 0, -12.9754, 0, -13.8003),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 2.08165e-12, 2.08165e-12, 2.08165e-12, -12.975, 0.8, -13.8, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 13.109, 0.8, -13.845, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 13.109, 0.8, 15.138, 0, 0, 0, 0, 0, 0, -12.931, 0.8, 15.138, 0, 0, 0, 0, 0, 0, -12.975, 0.8, -13.8),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
-point_count = 6
+point_count = 5
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tx4qc")
@@ -77,10 +77,11 @@ skeleton = NodePath("../MeshInstance3D")
 curve = SubResource("Curve3D_xjsmf")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(0.00170989, 0, -0.999999, 0, 1, 0, 0.999999, 0, 0.00170989, -12.9754, 0, -13.8003)
+transform = Transform3D(0.00172515, 0, -0.999999, 0, 1, 0, 0.999999, 0, 0.00172515, -12.975, 0.8, -13.8)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
