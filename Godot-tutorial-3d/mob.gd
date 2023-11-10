@@ -3,6 +3,8 @@ extends CharacterBody3D
 @export var min_speed = 10
 @export var max_speed = 18
 
+var is_squashed = false
+
 signal squashed
 
 func _physics_process(delta):
@@ -21,5 +23,9 @@ func _on_visible_on_screen_enabler_3d_screen_exited():
 	queue_free()
 
 func squash():
+	if(is_squashed):
+		return
+	
+	is_squashed = true
 	squashed.emit()
 	queue_free()
