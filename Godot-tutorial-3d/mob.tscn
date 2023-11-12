@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkhned0k6yusd"]
+
+[ext_resource type="Script" path="res://mob.gd" id="1_0b52e"]
+[ext_resource type="PackedScene" uid="uid://bxbtd8olekdfh" path="res://art/mob.glb" id="1_qb7vt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5wnq6"]
+size = Vector3(1.83126, 0.609993, 1.86496)
+
+[sub_resource type="Animation" id="Animation_hrv7n"]
+resource_name = "float"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Character:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.7, 1.2),
+"transitions": PackedFloat32Array(0.42, 2.07, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(2.08165e-12, 0.65, 2.08165e-12), Vector3(2.08165e-12, 0.35, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Character:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5, 1.2),
+"transitions": PackedFloat32Array(0.42, 0.44, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.139626, 3.48787e-16, 3.48787e-16), Vector3(-0.15708, 3.48787e-16, 3.48787e-16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n87jx"]
+_data = {
+"float": SubResource("Animation_hrv7n")
+}
+
+[node name="Mob" type="CharacterBody3D" groups=["mob"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_0b52e")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Character" parent="Pivot" instance=ExtResource("1_qb7vt")]
+transform = Transform3D(1, -3.97412e-16, 3.45381e-16, 3.45381e-16, 0.990234, 0.139413, -3.97412e-16, -0.139413, 0.990234, 2.08165e-12, 0.545794, 2.08165e-12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.221705, 0)
+shape = SubResource("BoxShape3D_5wnq6")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.288507, 0.329129)
+aabb = AABB(-1.17049, -0.494491, -1.68995, 2.34098, 1.18429, 3.37989)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+libraries = {
+"": SubResource("AnimationLibrary_n87jx")
+}
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler3D" to="." method="_on_visible_on_screen_enabler_3d_screen_exited"]
