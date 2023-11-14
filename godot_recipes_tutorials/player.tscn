@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhicq3drg0bws"]
+[gd_scene load_steps=14 format=3 uid="uid://bhicq3drg0bws"]
 
 [ext_resource type="Texture2D" uid="uid://dpvjis6xulnve" path="res://Mini Pixel Pack 3/Player ship/Player_ship (16 x 16).png" id="1_g1nwk"]
+[ext_resource type="Script" path="res://player.gd" id="1_kil74"]
 [ext_resource type="Texture2D" uid="uid://cu5n2ajfse534" path="res://Mini Pixel Pack 3/Player ship/Boosters (16 x 16).png" id="2_u54p8"]
 [ext_resource type="Texture2D" uid="uid://dha0xwth041op" path="res://Mini Pixel Pack 3/Player ship/Boosters_left (16 x 16).png" id="3_m4x25"]
 [ext_resource type="Texture2D" uid="uid://isde0dtd0w0d" path="res://Mini Pixel Pack 3/Player ship/Boosters_right (16 x 16).png" id="4_v4v5i"]
@@ -69,6 +70,7 @@ animations = [{
 size = Vector2(14, 14)
 
 [node name="Player" type="Area2D"]
+script = ExtResource("1_kil74")
 
 [node name="Ship" type="Sprite2D" parent="."]
 texture = ExtResource("1_g1nwk")
@@ -76,11 +78,11 @@ hframes = 3
 frame = 1
 
 [node name="Boosters" type="AnimatedSprite2D" parent="Ship"]
+position = Vector2(0, 15)
 sprite_frames = SubResource("SpriteFrames_8wlfs")
-animation = &"right"
+animation = &"forward"
 autoplay = "forward"
-frame = 1
-frame_progress = 0.601618
+frame_progress = 0.0730449
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_y2cw1")
