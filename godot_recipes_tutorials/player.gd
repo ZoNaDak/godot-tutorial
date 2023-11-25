@@ -19,6 +19,7 @@ func _ready():
 	start()
 
 func start():
+	show()
 	position = Vector2(screen_size.x / 2, screen_size.y - 64)
 	$GunCooldown.wait_time = cooldown
 	shield = max_shield

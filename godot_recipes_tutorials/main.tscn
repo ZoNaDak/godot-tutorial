@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://doe3746228tfk"]
+[gd_scene load_steps=10 format=3 uid="uid://doe3746228tfk"]
 
 [ext_resource type="Texture2D" uid="uid://debcpl2fg6cfo" path="res://Mini Pixel Pack 3/Space_BG (2 frames) (64 x 64).png" id="1_alv5o"]
 [ext_resource type="Script" path="res://main.gd" id="1_mentk"]
 [ext_resource type="PackedScene" uid="uid://bhicq3drg0bws" path="res://player.tscn" id="2_j1kpx"]
+[ext_resource type="Texture2D" uid="uid://b0dyiglpvfxoj" path="res://Mini Pixel Pack 3/UI objects/START (48 x 8).png" id="3_pipo0"]
 [ext_resource type="PackedScene" uid="uid://b3ckahp6q2u3s" path="res://ui.tscn" id="4_ev7m3"]
+[ext_resource type="Texture2D" uid="uid://d0vudvdod1dxp" path="res://Mini Pixel Pack 3/UI objects/GAME_OVER (72 x 8).png" id="4_fdwik"]
 
 [sub_resource type="Animation" id="Animation_ruu1s"]
 length = 2.0
@@ -50,6 +52,21 @@ script = ExtResource("1_mentk")
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("4_ev7m3")]
 
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="TextureButton" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_pipo0")
+
+[node name="GameOver" type="TextureRect" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("4_fdwik")
+
 [node name="Background" type="Sprite2D" parent="."]
 texture_repeat = 2
 texture = ExtResource("1_alv5o")
@@ -65,4 +82,6 @@ libraries = {
 
 [node name="Player" parent="." instance=ExtResource("2_j1kpx")]
 
+[connection signal="pressed" from="CanvasLayer/CenterContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="shield_changed" from="Player" to="CanvasLayer/UI" method="update_shield"]
