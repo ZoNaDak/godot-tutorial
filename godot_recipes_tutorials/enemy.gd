@@ -1,4 +1,6 @@
 extends Area2D
+	
+signal died
 
 var bullet_scene = preload("res://enemy_bullet.tscn")
 
@@ -43,5 +45,3 @@ func explode():
 	died.emit(5)
 	await $AnimationPlayer.animation_finished
 	queue_free()
-	
-signal died

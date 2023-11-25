@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://doe3746228tfk"]
+[gd_scene load_steps=8 format=3 uid="uid://doe3746228tfk"]
 
 [ext_resource type="Texture2D" uid="uid://debcpl2fg6cfo" path="res://Mini Pixel Pack 3/Space_BG (2 frames) (64 x 64).png" id="1_alv5o"]
 [ext_resource type="Script" path="res://main.gd" id="1_mentk"]
 [ext_resource type="PackedScene" uid="uid://bhicq3drg0bws" path="res://player.tscn" id="2_j1kpx"]
+[ext_resource type="PackedScene" uid="uid://b3ckahp6q2u3s" path="res://ui.tscn" id="4_ev7m3"]
 
 [sub_resource type="Animation" id="Animation_ruu1s"]
 length = 2.0
@@ -45,6 +46,10 @@ _data = {
 [node name="Main" type="Node2D"]
 script = ExtResource("1_mentk")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("4_ev7m3")]
+
 [node name="Background" type="Sprite2D" parent="."]
 texture_repeat = 2
 texture = ExtResource("1_alv5o")
@@ -59,3 +64,5 @@ libraries = {
 }
 
 [node name="Player" parent="." instance=ExtResource("2_j1kpx")]
+
+[connection signal="shield_changed" from="Player" to="CanvasLayer/UI" method="update_shield"]
