@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://doe3746228tfk"]
+[gd_scene load_steps=7 format=3 uid="uid://doe3746228tfk"]
 
 [ext_resource type="Texture2D" uid="uid://debcpl2fg6cfo" path="res://Mini Pixel Pack 3/Space_BG (2 frames) (64 x 64).png" id="1_alv5o"]
+[ext_resource type="Script" path="res://main.gd" id="1_mentk"]
 [ext_resource type="PackedScene" uid="uid://bhicq3drg0bws" path="res://player.tscn" id="2_j1kpx"]
 
-[sub_resource type="Animation" id="Animation_ngihi"]
-resource_name = "scroll"
+[sub_resource type="Animation" id="Animation_ruu1s"]
 length = 2.0
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -20,8 +19,10 @@ tracks/0/keys = {
 "values": [Rect2(2.08165e-12, 2.08165e-12, 240, 320), Rect2(2.08165e-12, -64, 240, 320)]
 }
 
-[sub_resource type="Animation" id="Animation_ruu1s"]
+[sub_resource type="Animation" id="Animation_ngihi"]
+resource_name = "scroll"
 length = 2.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -42,13 +43,14 @@ _data = {
 }
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_mentk")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_repeat = 2
 texture = ExtResource("1_alv5o")
 centered = false
 region_enabled = true
-region_rect = Rect2(2.08165e-12, -64, 240, 320)
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 240, 320)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "scroll"
